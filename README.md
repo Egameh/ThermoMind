@@ -196,9 +196,9 @@ This is the most important finding of the project.
 
 The contrast is stark. Topics with hundreds of training examples improved meaningfully. Topics with zero or near-zero training examples showed no improvement — or regression, because the model applies learned domain style confidently but incorrectly.
 
-### The Chain-of-Thought Effect
+### The Effect of 'Chain-of-Thought'
 
-Training data was not just Q&A pairs — every entry was a step-by-step derivation with explicit formula declarations, numbered reasoning chains, and LaTeX notation. The Flash vetter rejected entries that did not meet this standard.
+Training data was not just Q&A pairs, every entry was a step-by-step derivation with explicit formula declarations, numbered reasoning chains, and LaTeX notation. The Flash vetter rejected entries that did not meet this standard.
 
 This enforced chain-of-thought format transferred to model behaviour: fine-tuned models produce more structured responses, ramble less, and apply formulas more consistently — even on questions where the final answer is wrong. The model learned *how to reason through a problem* structurally, not just what the answer is.
 
@@ -212,7 +212,8 @@ Mistral 7B did not clearly outperform Llama 3B after fine-tuning. Both models sh
 
 ### Primary failure mode: Style transfer without knowledge transfer
 
-The fine-tuned model learned the structure and vocabulary of expert thermodynamics responses more thoroughly than the underlying domain principles. On entropy generation problems, the model invented a non-existent formula `S_gen = ΔS / T_avg` with full confidence — correct format, completely wrong physics.
+The fine-tuned model learned the structure and vocabulary of expert thermodynamics responses more thoroughly than the underlying domain principles. On entropy generation problems, the model invented a non-existent formula `S_gen = ΔS / T_avg` with full confidence. 
+Correct format, completely wrong physics.
 
 This is a known limitation of fine-tuning on small datasets: surface patterns are learned before deep relationships.
 
@@ -222,9 +223,6 @@ Topics with zero or minimal training examples showed no improvement regardless o
 
 **Implication:** Topic frequency analysis before training is as important as total dataset size. A 1,000-entry dataset with balanced coverage across all thermodynamics topics would likely outperform a 2,000-entry dataset skewed toward a subset.
 
-### Tertiary failure mode: Token truncation
-
-The 1,536 token cap silently truncated longer training answers. Multi-step derivations requiring 2,000+ tokens were cut off mid-calculation. The model learned to produce responses of approximately this length, sometimes stopping before completing the reasoning chain.
 
 ### What would fix this
 
@@ -242,7 +240,7 @@ Loubet et al. (2025), *"Using large language models for solving textbook-style t
 
 This paper benchmarked GPT-3.5, GPT-4, GPT-4o, Llama 3.1 70B, and le Chat on 22 textbook thermodynamics problems without fine-tuning. Key overlapping findings:
 
-- All models perform well on simple problems but deteriorate on complex multi-step reasoning — consistent with ThermoLLM's results
+- All models perform well on simple problems but deteriorate on complex multi-step reasoning — consistent with ThermoMind's results
 - Llama 3.1's primary error types (wrong equations, context confusion) match the failure modes observed here
 - The authors explicitly propose using knowledge-based problem solvers to generate verified training data as a direction for improvement — the three-stage synthetic pipeline in this project is a direct implementation of that proposal, developed independently
 
