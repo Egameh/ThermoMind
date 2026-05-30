@@ -14,7 +14,7 @@ This project asks a focused research question:
 
 > *Can a multi-stage LLM pipeline generate chain-of-thought thermodynamics training data of sufficient quality to measurably improve domain reasoning in fine-tuned models — without access to large GPU clusters?*
 
-The answer is yes — with an important qualification: improvement is directly proportional to training data coverage of the topic. Fine-tuning improved mean Gemini-judge scores by ~1.5–2 points and halved hallucination rates on well-represented topics. Topics absent from the training data showed no improvement regardless of model size.
+The answer is yes — with an important qualification: improvement is directly proportional to training data coverage of the topic. Fine-tuning improved mean Gemini-judge scores by ~22–33% and reduced hallucination by 50% on well-represented topics. Topics absent from the training data showed no improvement regardless of model size.
 
 This finding directly relates to concurrent peer-reviewed research: Loubet et al. (2025), *Computers and Chemical Engineering*, who benchmarked frontier LLMs on thermodynamics problems without fine-tuning and proposed synthetic verified training data as a path to improvement — which is precisely what this project implements.
 
