@@ -55,7 +55,7 @@ This finding directly relates to concurrent peer-reviewed research: Loubet et al
                       Save to JSONL      Discard
 ```
 
-The three-stage design deliberately separates generation from quality control. Gemini Pro generates; Gemini Flash audits. Flash is faster and cheaper, making it appropriate for the binary VALID/INVALID judgement at scale — a deliberate cost/quality trade-off.
+The three-stage design deliberately separates generation from quality control. Gemini Pro generates; Gemini Flash audits. Flash is faster and cheaper, making it appropriate for the binary VALID/INCORRECT judgement at scale, a deliberate cost/quality trade-off.
 
 A contamination check was added to catch cases where the system prompt leaked into the instruction field, ensuring clean Q&A pairs.
 
