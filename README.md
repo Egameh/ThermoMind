@@ -131,7 +131,7 @@ The initial configuration targeted only attention projections (q, v, o). Attenti
 | 75 | 0.7590 | 0.7439 |
 | 100 | 0.7374 | 0.7366 |
 
-Mistral converged to a lower final val loss (0.737 vs 0.880), consistent with its larger parameter count. Neither model showed val loss divergence — no overfitting within the 2-epoch budget.
+Mistral converged to a lower final val loss (0.7366) , consistent with its larger parameter count. Neither model showed val loss divergence — no overfitting within the 2-epoch budget.
 
 ---
 
