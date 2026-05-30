@@ -1,0 +1,22 @@
+# Core ML stack
+torch>=2.1.0
+transformers==4.41.2
+datasets==2.19.0
+peft==0.10.0
+trl==0.8.6
+bitsandbytes>=0.43.0
+accelerate>=0.29.0
+
+# Data pipeline
+google-genai>=1.0.0
+pymupdf4llm>=0.0.17
+pdfplumber>=0.11.0
+
+# Evaluation
+pandas>=2.0.0
+matplotlib>=3.8.0
+scipy>=1.11.0
+
+# Utilities
+tqdm>=4.66.0
+jupyter>=1.0.0
