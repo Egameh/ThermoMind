@@ -1,6 +1,6 @@
 # ThermoMind: Domain Adaptation of LLMs for Thermodynamics Reasoning
 
-> Investigating whether a synthetic chain-of-thought data pipeline can improve thermodynamics reasoning in small language models — under consumer hardware constraints.
+> Investigating whether a synthetic chain-of-thought data pipeline can improve thermodynamics reasoning in small language models under consumer hardware constraints.
 
 **Author:** Egameh Omokagbo | Process Engineer & ML Practitioner  
 **Hardware:** MacBook (data pipeline) + Google Colab GPU (training)  
@@ -12,11 +12,11 @@
 
 This project asks a focused research question:
 
-> *Can a multi-stage LLM pipeline generate chain-of-thought thermodynamics training data of sufficient quality to measurably improve domain reasoning in fine-tuned models — without access to large GPU clusters?*
+> *Can a multi-stage LLM pipeline generate chain-of-thought thermodynamics training data of sufficient quality to measurably improve domain reasoning in fine-tuned models, without access to large GPU clusters?*
 
-The answer is yes — with an important qualification: improvement is directly proportional to training data coverage of the topic. Fine-tuning improved mean Gemini-judge scores by ~22–33% and reduced hallucination by 50% on well-represented topics. Topics absent from the training data showed no improvement regardless of model size.
+The answer is YES, with an important qualification: improvement is directly proportional to training data coverage of the topic. Fine-tuning improved mean Gemini-judge scores by ~22–33% and reduced hallucination by 50% on well represented topics. Topics absent from the training data showed no improvement regardless of model size.
 
-This finding directly relates to concurrent peer-reviewed research: Loubet et al. (2025), *Computers and Chemical Engineering*, who benchmarked frontier LLMs on thermodynamics problems without fine-tuning and proposed synthetic verified training data as a path to improvement — which is precisely what this project implements.
+This finding directly relates to concurrent peer-reviewed research: Loubet et al. (2025), *Computers and Chemical Engineering*, who benchmarked frontier LLMs on thermodynamics problems without fine-tuning and proposed synthetic verified training data as a path to improvement, which is precisely what this project implements.
 
 ---
 
@@ -55,7 +55,7 @@ This finding directly relates to concurrent peer-reviewed research: Loubet et al
                       Save to JSONL      Discard
 ```
 
-The three-stage design deliberately separates generation from quality control. Gemini Pro generates; Gemini Flash audits. Flash is faster and cheaper, making it appropriate for the binary VALID/INCORRECT judgement at scale, a deliberate cost/quality trade-off.
+The three-stage design deliberately separates generation from quality control. Gemini Pro generates; Gemini Flash audits. Flash is faster and cheaper, making it appropriate for the binary VALID/INCORRECT judgement at scale, a deliberate cost/quality tradeoff.
 
 A contamination check was added to catch cases where the system prompt leaked into the instruction field, ensuring clean Q&A pairs.
 
@@ -131,7 +131,7 @@ The initial configuration targeted only attention projections (q, v, o). Attenti
 | 75 | 0.7590 | 0.7439 |
 | 100 | 0.7374 | 0.7366 |
 
-Mistral converged to a lower final val loss (0.7366) , consistent with its larger parameter count. Neither model showed val loss divergence — no overfitting within the 2-epoch budget.
+Mistral converged to a lower final val loss (0.7366) , consistent with its larger parameter count. Neither model showed val loss divergence, no overfitting within the 2-epoch budget.
 
 ---
 
@@ -171,7 +171,7 @@ Questions were split by training data frequency to test the data coverage hypoth
 | Mistral 7B — base | 3.5–4.3 | 2.6–3.4 | 3.0 avg |
 | **Mistral 7B — fine-tuned** | **5.1–5.5** | **1.0–1.9** | **1.0–2.0 avg** |
 
-Fine-tuning improved mean scores by ~1.5–2 points across both architectures. Standard deviation reduced significantly in both cases — the fine-tuned models are more consistent than base models.
+Fine-tuning improved mean scores by ~1.5–2 points across both architectures. Standard deviation reduced significantly in both cases, the fine-tuned models are more consistent than base models.
 
 ### Secondary Finding: Data Coverage Drives Performance
 
@@ -194,13 +194,13 @@ This is the most important finding of the project.
 | Q02 | Free Expansion | ~1.0 | ~0.5 |
 | Q03 | Throttling | ~1.0 | ~0.0 |
 
-The contrast is stark. Topics with hundreds of training examples improved meaningfully. Topics with zero or near-zero training examples showed no improvement — or regression, because the model applies learned domain style confidently but incorrectly.
+The contrast is stark. Topics with hundreds of training examples improved meaningfully. Topics with zero or near-zero training examples showed no improvement or regression, because the model applies learned domain style confidently but incorrectly.
 
 ### The Effect of 'Chain-of-Thought'
 
 Training data was not just Q&A pairs, every entry was a step-by-step derivation with explicit formula declarations, numbered reasoning chains, and LaTeX notation. The Flash vetter rejected entries that did not meet this standard.
 
-This enforced chain-of-thought format transferred to model behaviour: fine-tuned models produce more structured responses, ramble less, and apply formulas more consistently — even on questions where the final answer is wrong. The model learned *how to reason through a problem* structurally, not just what the answer is.
+This enforced chain-of-thought format transferred to model behaviour: fine-tuned models produce more structured responses, ramble less, and apply formulas more consistently, even on questions where the final answer is wrong. The model learned *how to reason through a problem* structurally, not just what the answer is.
 
 ### Model Size Was Not the Primary Driver
 
@@ -219,7 +219,7 @@ This is a known limitation of fine-tuning on small datasets: surface patterns ar
 
 ### Secondary failure mode: Dataset coverage gaps
 
-Topics with zero or minimal training examples showed no improvement regardless of model size. COP (0 entries) was the clearest example — both Llama and Mistral consistently failed refrigerator energy balance questions that any thermodynamics textbook would cover in chapter two.
+Topics with zero or minimal training examples showed no improvement regardless of model size. COP (0 entries) was the clearest example,  both Llama and Mistral consistently failed refrigerator energy balance questions that any thermodynamics textbook would cover in chapter two.
 
 **Implication:** Topic frequency analysis before training is as important as total dataset size. A 1,000-entry dataset with balanced coverage across all thermodynamics topics would likely outperform a 2,000-entry dataset skewed toward a subset.
 
