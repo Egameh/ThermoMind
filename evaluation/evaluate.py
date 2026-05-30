@@ -127,7 +127,7 @@ def load_model(model_path: str, hf_token: str, adapter_path: str = None):
 # Inference
 # ---------------------------------------------------------------------------
 
-def generate(model, tokenizer, question: str, max_new_tokens: int = 400) -> str:
+def generate(model, tokenizer, question: str, max_new_tokens: int = 1200) -> str:
     messages = [
         {
             "role": "system",
