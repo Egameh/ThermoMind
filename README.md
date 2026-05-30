@@ -50,7 +50,7 @@ This finding directly relates to concurrent peer-reviewed research: Loubet et al
                          └──────────────────────┘
                                     │
                           ┌─────────┴────────┐
-                          │ VALID            │ INVALID
+                          │ VALID            │ INCORRECT
                           ▼                  ▼
                       Save to JSONL      Discard
 ```
