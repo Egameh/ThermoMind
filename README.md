@@ -32,7 +32,7 @@ This finding directly relates to concurrent peer-reviewed research: Loubet et al
               │
               ▼
     ┌─────────────────────┐
-    │   Text Chunking     │  2,800 character chunks
+    │   Text Chunking     │  2,000 + character chunks
     └─────────────────────┘
               │
     ┌─────────┴──────────────────────┐
