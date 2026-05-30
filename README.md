@@ -329,7 +329,7 @@ python evaluation/evaluate.py \
 
 ## Key Takeaways
 
-1. **Fine-tuning on synthetic chain-of-thought data works.** Mean scores improved ~1.5–2 points and hallucination rates halved across two model architectures.
+1. **Fine-tuning on synthetic chain-of-thought data works.** Mean scores improved ~22–33% (1.5-2 point increase) and hallucination rates halved across two model architectures.
 
 2. **Data coverage is the primary driver of performance, not model size.** Mistral 7B did not clearly outperform Llama 3B after fine-tuning on the same dataset. Topics with zero training examples failed regardless of model capacity.
 
