@@ -69,9 +69,17 @@ def pdf_to_markdown(pdf_path: str, output_path: str) -> str:
 # ---------------------------------------------------------------------------
 # Stage 1: Question generation
 # ---------------------------------------------------------------------------
+# NOTE ON PROMPT DESIGN:
+# The persona assigned in the prompt directly influences question complexity.
+# Using "Professor of Chemical Engineering" produces more advanced, multi-step
+# questions. Using "student in a thermodynamics class" produces simpler,
+# more direct questions. This was observed empirically during dataset generation
+# and is consistent with findings in Loubet et al. (2025), who used a student
+# persona specifically to benchmark LLM problem-solving at exam level.
+# Adjust the persona in the prompt below to control dataset difficulty.
 
 def generate_instruction(client, pro_model: str, chunk: str) -> Optional[str]:
-    """Generate a single thermodynamics question from a text chunk."""
+    
     prompt = f"""You are a Professor of Chemical Engineering.
 Based on the technical data below, generate ONE thermodynamics question for an engineering student.
 
@@ -101,7 +109,7 @@ TECHNICAL DATA: {chunk}"""
 # ---------------------------------------------------------------------------
 
 def generate_answer(client, pro_model: str, instruction: str, chunk: str) -> Optional[dict]:
-    """Generate a rigorous step-by-step answer for a thermodynamics question."""
+    
     prompt = f"""You are a Thermodynamics Specialist. Answer the question below rigorously.
 
 QUESTION: {instruction}
@@ -131,9 +139,11 @@ Guidelines:
 # ---------------------------------------------------------------------------
 # Stage 3: Scientific vetting
 # ---------------------------------------------------------------------------
+# Swapped INVALID with INCORRECT, because INVALID still contains 'VALID'. 
+# A subtle bug that would've made the vetter always return True even when the entry is Invalid.
 
 def vet_entry(client, flash_model: str, pair: dict, chunk: str) -> bool:
-    """Audit a Q&A pair for scientific accuracy using Gemini Flash."""
+    
     prompt = f"""You are a Technical Auditor. Review this data for scientific accuracy.
 
 SOURCE TEXT: {chunk}
