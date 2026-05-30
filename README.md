@@ -1,4 +1,4 @@
-# ThermoLLM: Domain Adaptation of LLMs for Thermodynamics Reasoning
+# ThermoMind: Domain Adaptation of LLMs for Thermodynamics Reasoning
 
 > Investigating whether a synthetic chain-of-thought data pipeline can improve thermodynamics reasoning in small language models — under consumer hardware constraints.
 
