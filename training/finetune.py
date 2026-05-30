@@ -39,7 +39,7 @@ from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer, SFTConfig
 
 MAX_LENGTH = 1536  # Hardware constraint: Colab GPU memory limit
-
+# Higher token lengths may improve performance (Along side a mode diverse dataset.)
 
 def load_quantized_model(model_id: str, hf_token: str):
     """Load model in 4-bit NF4 quantisation."""
@@ -114,7 +114,7 @@ def format_dataset(dataset, tokenizer):
 
 
 def train(model_id: str, dataset_path: str, output_dir: str, hf_token: str):
-    """Run QLoRA fine-tuning pipeline."""
+    """Run fine-tuning pipeline."""
     model, tokenizer = load_quantized_model(model_id, hf_token)
     model = apply_lora(model)
 
@@ -131,7 +131,7 @@ def train(model_id: str, dataset_path: str, output_dir: str, hf_token: str):
     sft_config = SFTConfig(
         output_dir=output_dir,
         dataset_text_field="text",
-        max_seq_length=MAX_LENGTH,
+        max_length=MAX_LENGTH,
         per_device_train_batch_size=1,
         gradient_accumulation_steps=32,   # effective batch = 32
         learning_rate=5e-5,
@@ -154,7 +154,7 @@ def train(model_id: str, dataset_path: str, output_dir: str, hf_token: str):
         args=sft_config,
     )
 
-    print(f"\n🚀 Training | Model: {model_id}\n")
+    print(f"\n Training | Model: {model_id}\n")
     trainer.train()
 
     os.makedirs(output_dir, exist_ok=True)
