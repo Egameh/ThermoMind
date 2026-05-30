@@ -154,7 +154,7 @@ Criteria:
 2. Does the "instruction" avoid mentioning the source text?
 3. Are backslashes correctly double-escaped?
 
-Respond ONLY with 'VALID' or 'INVALID'."""
+Respond ONLY with 'VALID' or 'INCORRECT'."""
 
     try:
         response = client.models.generate_content(
