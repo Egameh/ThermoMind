@@ -2,7 +2,7 @@
 
 > Investigating whether a synthetic chain-of-thought data pipeline can improve thermodynamics reasoning in small language models under consumer hardware constraints.
 
-**Author:** Egameh Omokagbo | Process Engineer & ML Practitioner  
+**Author:** Egameh Omokagbo | Industrial AI Engineer & ML Practitioner  
 **Hardware:** MacBook (data pipeline) + Google Colab GPU (training)  
 **Models tested:** Llama-3.2-3B-Instruct | Mistral-7B-Instruct-v0.2
 
